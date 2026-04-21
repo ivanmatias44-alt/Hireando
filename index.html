@@ -1,94 +1,13 @@
-<!DOCTYPE html>
-<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Empresa | Sitio Estático</title>
-    <style>
-        /* CSS para que se vea bien desde el principio */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
-        }
-        header {
-            background: #2c3e50;
-            color: white;
-            padding: 2rem;
-            text-align: center;
-        }
-        .container {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            padding: 2rem;
-        }
-        .galeria {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-        .foto-placeholder {
-            background: #ddd;
-            height: 150px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 4px;
-            color: #666;
-        }
-        button {
-            background: #3498db;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        button:hover {
-            background: #2980b9;
-        }
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
 
-    <header>
-        <h1>Bienvenido a Mi Empresa</h1>
-        <p>Sitio estático personalizado (.com.ar)</p>
-    </header>
+    <h1 data-aos="fade-right">Mi Empresa</h1>
 
-    <div class="container">
-        <h2>Información</h2>
-        <p>Este es un sitio web creado desde cero con HTML, CSS y JavaScript.</p>
-        
-        <button id="miBoton">Haz clic aquí</button>
-        <p id="mensaje"></p>
-
-        <h2>Galería de Fotos</h2>
-        <div class="galeria">
-            <div class="foto-placeholder">Foto 1 (Próximamente)</div>
-            <div class="foto-placeholder">Foto 2 (Próximamente)</div>
-            <div class="foto-placeholder">Foto 3 (Próximamente)</div>
-        </div>
-    </div>
-
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // JavaScript básico para probar funcionalidad
-        const boton = document.getElementById('miBoton');
-        const mensaje = document.getElementById('mensaje');
-
-        boton.addEventListener('click', () => {
-            mensaje.innerText = "¡El JavaScript funciona correctamente!";
-            mensaje.style.color = "green";
-            mensaje.style.fontWeight = "bold";
-        });
+      AOS.init(); // Inicializa las animaciones
     </script>
 </body>
-</html>
