@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hireando | Reclutamiento Ágil & Accesible</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;1,600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
@@ -22,9 +22,6 @@
             overflow-x: hidden; 
         }
 
-        .navbar { padding: 1rem 2rem; background: white; }
-        .nav-link { color: var(--gris-texto); font-weight: 500; margin: 0 10px; }
-        
         .hero { 
             position: relative; 
             padding: 100px 0; 
@@ -34,10 +31,10 @@
             align-items: center; 
         }
 
-        /* Aplicando Poppins SemiBold (600) al título */
+        /* Título en Poppins SemiBold y Cursiva */
         .hero h1 { 
-            font-family: 'Poppins', sans-serif;
             font-weight: 600; 
+            font-style: italic; 
             font-size: 3.5rem; 
             line-height: 1.1; 
         }
@@ -98,10 +95,9 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 1000, once: true });
-        // Nota: Asegúrate de tener el archivo nav.html en la misma carpeta para que esto cargue
         fetch('nav.html').then(res => res.text()).then(data => { 
             document.getElementById('menu-placeholder').innerHTML = data; 
-        }).catch(err => console.log("Error cargando el menú:", err));
+        });
     </script>
 </body>
 </html>
