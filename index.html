@@ -19,19 +19,21 @@
         body { 
             font-family: 'Poppins', sans-serif; 
             color: var(--gris-texto); 
-            overflow-x: hidden; 
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
         }
 
         .hero { 
             position: relative; 
-            padding: 100px 0; 
+            /* Reducido el padding superior para eliminar el espacio en blanco */
+            padding: 30px 0 80px 0; 
             background: linear-gradient(135deg, #ffffff 60%, #f9f9f9 100%); 
-            min-height: 80vh; 
+            min-height: calc(100vh - 70px); 
             display: flex; 
             align-items: center; 
         }
 
-        /* Título en Poppins SemiBold y Cursiva */
         .hero h1 { 
             font-weight: 600; 
             font-style: italic; 
@@ -68,6 +70,12 @@
             height: 500px; 
             box-shadow: -20px 20px 0px var(--violeta-claro); 
         }
+
+        /* Ajuste para dispositivos móviles */
+        @media (max-width: 991px) {
+            .hero { padding: 40px 0; }
+            .hero h1 { font-size: 2.5rem; }
+        }
     </style>
 </head>
 <body>
@@ -95,9 +103,14 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 1000, once: true });
-        fetch('nav.html').then(res => res.text()).then(data => { 
-            document.getElementById('menu-placeholder').innerHTML = data; 
-        });
+        
+        // Carga del menú
+        fetch('nav.html')
+            .then(res => res.text())
+            .then(data => { 
+                document.getElementById('menu-placeholder').innerHTML = data; 
+            })
+            .catch(err => console.error('Error cargando el nav:', err));
     </script>
 </body>
 </html>
