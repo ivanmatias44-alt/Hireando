@@ -10,89 +10,97 @@
     <style>
         :root { 
             --verde-primario: #2EAD5B; 
-            --violeta-oscuro: #6B42C1; 
-            --azul-claro: #007bff;
-            --gris-texto: #333333; 
-            --gris-suave: #f8f9fa;
+            --violeta-principal: #6B42C1; 
+            --azul-propuesta: #007bff;
+            --gris-oscuro: #333333; 
+            --gris-claro: #fcfcfc;
         }
         
         body { 
             font-family: 'Poppins', sans-serif; 
-            color: var(--gris-texto); 
-            overflow-x: hidden;
-        }
-
-        /* Hero Section - Basada en Imagen 1 */
-        .section-talent {
-            padding: 100px 0;
+            color: var(--gris-oscuro); 
             background-color: #fff;
+            line-height: 1.6;
         }
 
-        .main-title {
+        /* Títulos principales */
+        .section-title {
             font-weight: 700;
             font-size: 2.5rem;
+            text-align: center;
             margin-bottom: 3rem;
-            text-transform: uppercase;
+            color: var(--gris-oscuro);
         }
 
-        .sub-title-purple {
-            color: var(--violeta-oscuro);
+        /* SECCIÓN 1: TALENTO */
+        .section-talent { padding: 80px 0; position: relative; }
+        
+        .purple-heading {
+            color: var(--violeta-principal);
             font-weight: 700;
-            margin-top: 2rem;
+            font-size: 1.8rem;
             margin-bottom: 1rem;
         }
 
-        .feature-item {
-            margin-bottom: 0.8rem;
-            display: flex;
-            align-items: center;
+        .custom-list { list-style: none; padding-left: 0; }
+        .custom-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
         }
-
-        .feature-item::before {
+        .custom-list li::before {
             content: "•";
             color: var(--verde-primario);
             font-weight: bold;
-            display: inline-block; 
-            width: 1em;
-            margin-left: -1em;
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -5px;
         }
 
-        .img-vector {
+        /* Imágenes flotantes decorativas */
+        .floating-img {
             max-width: 100%;
-            height: auto;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.05));
         }
 
-        /* Claves Section - Basada en Imagen 2 */
-        .section-keys {
+        /* SECCIÓN 2: PROPUESTAS (Cards Estilo Imagen 2) */
+        .section-proposals {
             padding: 100px 0;
-            background-color: var(--gris-suave);
+            background-color: var(--gris-claro);
         }
 
-        .border-left-accent {
-            border-left: 5px solid var(--azul-claro);
-            padding-left: 20px;
-            margin-bottom: 40px;
+        .proposal-card {
+            background: white;
+            border-radius: 25px;
+            padding: 40px 30px;
+            height: 100%;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.03);
         }
 
-        .accent-title {
-            color: var(--azul-claro);
+        .proposal-card:hover { transform: translateY(-10px); }
+
+        .blue-border-title {
+            border-left: 5px solid var(--azul-propuesta);
+            padding-left: 15px;
+            margin-bottom: 25px;
+        }
+
+        .blue-border-title h3 {
+            color: var(--azul-propuesta);
             font-weight: 700;
             font-size: 1.5rem;
-            margin-bottom: 15px;
+            margin-bottom: 0;
         }
 
-        .list-unstyled li {
-            margin-bottom: 8px;
-            font-weight: 400;
-        }
-
-        .card-custom {
-            background: white;
-            border: none;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            height: 100%;
+        .proposal-list { list-style: none; padding: 0; margin: 0; }
+        .proposal-list li {
+            margin-bottom: 12px;
+            font-size: 1.05rem;
+            color: #555;
         }
 
     </style>
@@ -102,92 +110,90 @@
     <div id="menu-placeholder"></div>
 
     <section class="section-talent container">
-        <h1 class="main-title text-center" data-aos="fade-up">EL TALENTO NOS HACE ÚNICOS</h1>
+        <h2 class="section-title" data-aos="fade-up">EL TALENTO NOS HACE ÚNICOS</h2>
         
         <div class="row align-items-center g-5">
-            <div class="col-lg-6" data-aos="fade-right">
+            <div class="col-lg-7" data-aos="fade-right">
                 <div class="mb-5">
-                    <h2 class="sub-title-purple">¿Qué es Hireando?</h2>
-                    <p class="lead">Solución ágil de reclutamiento que conecta empresas con talento calificado de forma rápida y eficiente.</p>
+                    <h3 class="purple-heading">¿Qué es Hireando?</h3>
+                    <p class="fs-5">Solución ágil de reclutamiento que conecta empresas con talento calificado de forma rápida y eficiente.</p>
                 </div>
 
                 <div class="mb-5">
-                    <h2 class="sub-title-purple">Desafío del Reclutamiento</h2>
-                    <ul class="list-unstyled ps-4">
-                        <li class="feature-item">Procesos de selección largos y costosos</li>
-                        <li class="feature-item">Dificultad para encontrar candidatos</li>
-                        <li class="feature-item">Falta de herramientas simples y efectivas</li>
+                    <h3 class="purple-heading">Desafío del Reclutamiento</h3>
+                    <ul class="custom-list">
+                        <li>Procesos de selección largos y costosos</li>
+                        <li>Dificultad para encontrar candidatos</li>
+                        <li>Falta de herramientas simples y efectivas</li>
                     </ul>
                 </div>
 
                 <div>
-                    <h2 class="sub-title-purple">Nuestra solución</h2>
-                    <ul class="list-unstyled ps-4">
-                        <li class="feature-item">Búsquedas rápidas y efectivas</li>
-                        <li class="feature-item">Base de talento validado</li>
-                        <li class="feature-item">Acompañamiento personalizado</li>
-                        <li class="feature-item">Metodología simple y transparente</li>
+                    <h3 class="purple-heading">Nuestra solución</h3>
+                    <ul class="custom-list">
+                        <li>Búsquedas rápidas y efectivas</li>
+                        <li>Base de talento validado</li>
+                        <li>Acompañamiento personalizado</li>
+                        <li>Metodología simple y transparente</li>
                     </ul>
                 </div>
             </div>
             
-            <div class="col-lg-6 text-center" data-aos="fade-left">
-                <img src="https://illustrations.popsy.co/purple/professional-cv-writing.svg" alt="Talento" class="img-vector" style="max-height: 500px;">
+            <div class="col-lg-5 text-center" data-aos="zoom-in">
+                <img src="https://illustrations.popsy.co/purple/work-from-home.svg" alt="Talento Hireando" class="floating-img">
             </div>
         </div>
     </section>
 
-    <section class="section-keys">
+    <section class="section-proposals">
         <div class="container">
-            <h2 class="main-title text-center mb-5" data-aos="fade-up">CLAVES DE LA PROPUESTA DE TRABAJO</h2>
+            <h2 class="section-title" data-aos="fade-up">CLAVES DE LA PROPUESTA DE TRABAJO</h2>
             
-            <div class="row g-4">
-                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="card-custom">
-                        <div class="border-left-accent">
-                            <h3 class="accent-title">Propuesta de Valor</h3>
-                            <ul class="list-unstyled">
-                                <li>Ahorro de tiempo en selección</li>
-                                <li>Reducción de costos</li>
-                                <li>Mejores contrataciones</li>
-                            </ul>
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="proposal-card text-start">
+                        <div class="blue-border-title">
+                            <h3>Propuesta de Valor</h3>
                         </div>
+                        <ul class="proposal-list">
+                            <li>Ahorro de tiempo en selección</li>
+                            <li>Reducción de costos</li>
+                            <li>Mejores contrataciones</li>
+                        </ul>
                     </div>
                 </div>
 
-                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="card-custom">
-                        <div class="border-left-accent">
-                            <h3 class="accent-title">¿Cómo funciona?</h3>
-                            <ul class="list-unstyled">
-                                <li>Relevamiento de la necesidad</li>
-                                <li>Búsqueda y filtrado</li>
-                                <li>Presentación de candidatos</li>
-                                <li>Acompañamiento hasta el ingreso</li>
-                            </ul>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="proposal-card text-start">
+                        <div class="blue-border-title">
+                            <h3>¿Cómo funciona?</h3>
                         </div>
+                        <ul class="proposal-list">
+                            <li>Relevamiento de la necesidad</li>
+                            <li>Búsqueda y filtrado</li>
+                            <li>Presentación de candidatos</li>
+                            <li>Acompañamiento hasta el ingreso</li>
+                        </ul>
                     </div>
                 </div>
 
-                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="card-custom">
-                        <div class="border-left-accent">
-                            <h3 class="accent-title">¿Por qué elegirnos?</h3>
-                            <ul class="list-unstyled">
-                                <li>Cercanía</li>
-                                <li>Rapidez</li>
-                                <li>Flexibilidad</li>
-                                <li>Enfoque en resultados</li>
-                            </ul>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="proposal-card text-start">
+                        <div class="blue-border-title">
+                            <h3>¿Por qué elegirnos?</h3>
                         </div>
+                        <ul class="proposal-list">
+                            <li>Cercanía</li>
+                            <li>Rapidez</li>
+                            <li>Flexibilidad</li>
+                            <li>Enfoque en resultados</li>
+                        </ul>
                     </div>
                 </div>
             </div>
 
-            <div class="row mt-5 align-items-center" data-aos="fade-up">
-                <div class="col-md-6 offset-md-3 text-center">
-                    <img src="https://illustrations.popsy.co/purple/woman-checking-growth-on-chart.svg" alt="Resultados" class="img-fluid" style="max-height: 300px;">
-                </div>
+            <div class="text-center mt-5" data-aos="fade-up">
+                <img src="https://illustrations.popsy.co/purple/success.svg" alt="Resultados" style="max-width: 250px;" class="mt-4">
             </div>
         </div>
     </section>
@@ -196,10 +202,12 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 1000, once: true });
-        // Simulación de carga de menú
-        fetch('nav.html').then(res => res.text()).then(data => {
-            document.getElementById('menu-placeholder').innerHTML = data;
-        }).catch(e => console.log("Nota: nav.html debe existir localmente"));
+        
+        // Carga del menú
+        fetch('nav.html')
+            .then(res => res.text())
+            .then(data => document.getElementById('menu-placeholder').innerHTML = data)
+            .catch(err => console.warn("Asegúrate de que nav.html exista para ver el menú."));
     </script>
 </body>
 </html>
