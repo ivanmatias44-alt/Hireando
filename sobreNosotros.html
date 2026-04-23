@@ -4,63 +4,189 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sobre Nosotros | Hireando</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         :root { 
             --verde-primario: #2EAD5B; 
             --violeta-oscuro: #6B42C1; 
-            --gris-texto: #4A4A4A; 
+            --azul-claro: #007bff;
+            --gris-texto: #333333; 
+            --gris-suave: #f8f9fa;
         }
-        body { font-family: 'Poppins', sans-serif; color: var(--gris-texto); line-height: 1.6; }
-        .about-header { 
-            background: linear-gradient(135deg, var(--verde-primario), #66C266); 
-            color: white; 
-            padding: 80px 0; 
-            text-align: center; 
+        
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            color: var(--gris-texto); 
+            overflow-x: hidden;
         }
-        .text-purple { color: var(--violeta-oscuro); font-weight: 600; }
-        .feature-list { list-style: none; padding-left: 0; }
-        .feature-list li::before {
-            content: "✓";
+
+        /* Hero Section - Basada en Imagen 1 */
+        .section-talent {
+            padding: 100px 0;
+            background-color: #fff;
+        }
+
+        .main-title {
+            font-weight: 700;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+        }
+
+        .sub-title-purple {
+            color: var(--violeta-oscuro);
+            font-weight: 700;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-item {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .feature-item::before {
+            content: "•";
             color: var(--verde-primario);
             font-weight: bold;
-            margin-right: 10px;
+            display: inline-block; 
+            width: 1em;
+            margin-left: -1em;
         }
-        .section-title { margin-bottom: 1.5rem; }
+
+        .img-vector {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Claves Section - Basada en Imagen 2 */
+        .section-keys {
+            padding: 100px 0;
+            background-color: var(--gris-suave);
+        }
+
+        .border-left-accent {
+            border-left: 5px solid var(--azul-claro);
+            padding-left: 20px;
+            margin-bottom: 40px;
+        }
+
+        .accent-title {
+            color: var(--azul-claro);
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .list-unstyled li {
+            margin-bottom: 8px;
+            font-weight: 400;
+        }
+
+        .card-custom {
+            background: white;
+            border: none;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            height: 100%;
+        }
+
     </style>
 </head>
 <body>
+
     <div id="menu-placeholder"></div>
 
-    <header class="about-header">
-        <div class="container" data-aos="fade-down">
-            <h1>¿Qué es Hireando?</h1>
-            <p class="lead">Solución ágil de reclutamiento que conecta empresas con talento calificado de forma rápida y eficiente.</p>
-        </div>
-    </header>
+    <section class="section-talent container">
+        <h1 class="main-title text-center" data-aos="fade-up">EL TALENTO NOS HACE ÚNICOS</h1>
+        
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6" data-aos="fade-right">
+                <div class="mb-5">
+                    <h2 class="sub-title-purple">¿Qué es Hireando?</h2>
+                    <p class="lead">Solución ágil de reclutamiento que conecta empresas con talento calificado de forma rápida y eficiente.</p>
+                </div>
 
-    <section class="py-5 container">
-        <div class="row g-5 align-items-center">
-            <div class="col-md-6" data-aos="fade-right">
-                <h2 class="text-purple section-title">Desafío del Reclutamiento</h2>
-                <ul class="feature-list">
-                    <li>Procesos de selección largos y costosos</li>
-                    <li>Dificultad para encontrar candidatos</li>
-                    <li>Falta de herramientas simples y efectivas</li>
-                </ul>
+                <div class="mb-5">
+                    <h2 class="sub-title-purple">Desafío del Reclutamiento</h2>
+                    <ul class="list-unstyled ps-4">
+                        <li class="feature-item">Procesos de selección largos y costosos</li>
+                        <li class="feature-item">Dificultad para encontrar candidatos</li>
+                        <li class="feature-item">Falta de herramientas simples y efectivas</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h2 class="sub-title-purple">Nuestra solución</h2>
+                    <ul class="list-unstyled ps-4">
+                        <li class="feature-item">Búsquedas rápidas y efectivas</li>
+                        <li class="feature-item">Base de talento validado</li>
+                        <li class="feature-item">Acompañamiento personalizado</li>
+                        <li class="feature-item">Metodología simple y transparente</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="col-lg-6 text-center" data-aos="fade-left">
+                <img src="https://illustrations.popsy.co/purple/professional-cv-writing.svg" alt="Talento" class="img-vector" style="max-height: 500px;">
+            </div>
+        </div>
+    </section>
+
+    <section class="section-keys">
+        <div class="container">
+            <h2 class="main-title text-center mb-5" data-aos="fade-up">CLAVES DE LA PROPUESTA DE TRABAJO</h2>
+            
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="card-custom">
+                        <div class="border-left-accent">
+                            <h3 class="accent-title">Propuesta de Valor</h3>
+                            <ul class="list-unstyled">
+                                <li>Ahorro de tiempo en selección</li>
+                                <li>Reducción de costos</li>
+                                <li>Mejores contrataciones</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="card-custom">
+                        <div class="border-left-accent">
+                            <h3 class="accent-title">¿Cómo funciona?</h3>
+                            <ul class="list-unstyled">
+                                <li>Relevamiento de la necesidad</li>
+                                <li>Búsqueda y filtrado</li>
+                                <li>Presentación de candidatos</li>
+                                <li>Acompañamiento hasta el ingreso</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="card-custom">
+                        <div class="border-left-accent">
+                            <h3 class="accent-title">¿Por qué elegirnos?</h3>
+                            <ul class="list-unstyled">
+                                <li>Cercanía</li>
+                                <li>Rapidez</li>
+                                <li>Flexibilidad</li>
+                                <li>Enfoque en resultados</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="col-md-6" data-aos="fade-left">
-                <div class="p-4 bg-light rounded-4 shadow-sm">
-                    <h2 class="text-purple section-title">Nuestra solución</h2>
-                    <ul class="feature-list">
-                        <li>Búsquedas rápidas y efectivas</li>
-                        <li>Base de talento validado</li>
-                        <li>Acompañamiento personalizado</li>
-                        <li>Metodología simple y transparente</li>
-                    </ul>
+            <div class="row mt-5 align-items-center" data-aos="fade-up">
+                <div class="col-md-6 offset-md-3 text-center">
+                    <img src="https://illustrations.popsy.co/purple/woman-checking-growth-on-chart.svg" alt="Resultados" class="img-fluid" style="max-height: 300px;">
                 </div>
             </div>
         </div>
@@ -69,15 +195,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({
-            duration: 1000,
-            once: true
-        });
-        // Carga del menú lateral/superior
-        fetch('nav.html')
-            .then(res => res.text())
-            .then(data => document.getElementById('menu-placeholder').innerHTML = data)
-            .catch(err => console.error('Error cargando el menú:', err));
+        AOS.init({ duration: 1000, once: true });
+        // Simulación de carga de menú
+        fetch('nav.html').then(res => res.text()).then(data => {
+            document.getElementById('menu-placeholder').innerHTML = data;
+        }).catch(e => console.log("Nota: nav.html debe existir localmente"));
     </script>
 </body>
 </html>
