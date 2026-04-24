@@ -36,11 +36,27 @@
             font-weight: 600 !important;
         }
 
+        /* TÍTULOS DE SECCIÓN CON LÍNEA VERDE */
         h2.section-title {
             font-size: 2.5rem;
             text-align: center;
             margin-bottom: 3.5rem;
             color: var(--violeta-fuerte);
+            position: relative;
+            padding-bottom: 15px;
+            display: block;
+        }
+
+        h2.section-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%); /* Centra la línea */
+            width: 80px; /* Ancho de la línea para títulos grandes */
+            height: 4px;
+            background-color: var(--verde-fuerte);
+            border-radius: 2px;
         }
 
         /* LAYOUT DE TARJETAS UNIFICADO */
@@ -90,7 +106,7 @@
 
         .card-header-title h3 {
             color: var(--violeta-fuerte);
-            font-weight: 600; /* SemiBold para títulos de card */
+            font-weight: 600; 
             font-size: 1.5rem;
             margin: 0;
             position: relative;
