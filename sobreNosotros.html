@@ -17,7 +17,7 @@
             --gris-fondo: #f8f9fa;
         }
         
-        /* Poppins Regular para todo el documento */
+        /* Poppins Regular para todo el documento por defecto */
         * {
             font-family: 'Poppins', sans-serif !important;
             font-weight: 400;
@@ -31,8 +31,12 @@
 
         .section-padding { padding: 80px 0; }
 
+        /* Estilo específico solicitado: Poppins SemiBold (600) */
+        .title-semibold {
+            font-weight: 600 !important;
+        }
+
         h2.section-title {
-            font-weight: 700;
             font-size: 2.5rem;
             text-align: center;
             margin-bottom: 3.5rem;
@@ -59,11 +63,10 @@
             box-shadow: 0 20px 40px rgba(107, 66, 193, 0.1);
         }
 
-        /* Contenedor circular para iconos (Estrategia de centrado total) */
         .icon-wrapper {
             width: 100px;
             height: 100px;
-            background-color: rgba(102, 194, 102, 0.12); /* Fondo verde claro suave */
+            background-color: rgba(102, 194, 102, 0.12);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -95,7 +98,6 @@
             padding-bottom: 10px;
         }
 
-        /* Subrayado central verde */
         .card-header-title h3::after {
             content: "";
             position: absolute;
@@ -123,7 +125,6 @@
             align-items: center;
         }
 
-        /* Checkmark verde */
         .proposal-list li::before {
             content: "✓";
             color: var(--verde-fuerte);
@@ -144,7 +145,7 @@
     <div id="menu-placeholder"></div>
 
     <section class="section-padding container">
-        <h2 class="section-title" data-aos="fade-up">EL TALENTO NOS HACE ÚNICOS</h2>
+        <h2 class="section-title title-semibold" data-aos="fade-up">EL TALENTO NOS HACE ÚNICOS</h2>
         
         <div class="row g-4 justify-content-center">
             <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
@@ -196,7 +197,7 @@
 
     <section class="section-padding" style="background-color: var(--gris-fondo);">
         <div class="container">
-            <h2 class="section-title" data-aos="fade-up">CLAVES DE LA PROPUESTA DE TRABAJO</h2>
+            <h2 class="section-title title-semibold" data-aos="fade-up">CLAVES DE LA PROPUESTA DE TRABAJO</h2>
             
             <div class="row g-4 justify-content-center">
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
@@ -257,7 +258,6 @@
     <script>
         AOS.init({ duration: 1000, once: true });
         
-        // Carga del menú nav.html
         fetch('nav.html')
             .then(res => res.text())
             .then(data => document.getElementById('menu-placeholder').innerHTML = data)
