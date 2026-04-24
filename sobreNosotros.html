@@ -33,14 +33,12 @@
 
         /* SECCIÓN 1: TALENTO */
         .section-talent { padding: 80px 0; position: relative; }
-        
         .purple-heading {
             color: var(--violeta-principal);
             font-weight: 700;
             font-size: 1.8rem;
             margin-bottom: 1rem;
         }
-
         .custom-list { list-style: none; padding-left: 0; }
         .custom-list li {
             position: relative;
@@ -54,16 +52,10 @@
             font-weight: bold;
             font-size: 1.5rem;
             position: absolute;
-            left: 0;
-            top: -5px;
+            left: 0; top: -5px;
         }
 
-        .floating-img {
-            max-width: 100%;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.05));
-        }
-
-        /* SECCIÓN 2: PROPUESTAS */
+        /* SECCIÓN 2: PROPUESTAS - ESTRATEGIA DE CENTRADO TOTAL */
         .section-proposals {
             padding: 100px 0;
             background-color: var(--gris-claro);
@@ -77,50 +69,75 @@
             box-shadow: 0 15px 35px rgba(0,0,0,0.06);
             transition: all 0.3s ease;
             border: 1px solid rgba(0,0,0,0.03);
+            
+            /* Centrado de la card */
             display: flex;
             flex-direction: column;
-            align-items: flex-start;
+            align-items: center; /* Centra todo el contenido horizontalmente */
+            text-align: center;  /* Centra los textos */
         }
 
         .proposal-card:hover { 
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(107, 66, 193, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 123, 255, 0.1);
         }
 
-        /* AJUSTE DE CONTENEDOR DE ICONO AL 100% */
-        .icon-container {
-            width: 80px; /* Tamaño del marco */
-            height: 80px;
+        /* Contenedor del icono: Ahora es un círculo flexible */
+        .icon-wrapper {
+            width: 100px;
+            height: 100px;
             background-color: rgba(0, 123, 255, 0.08);
-            border-radius: 18px;
-            overflow: hidden; /* Importante para que la imagen no se salga de las esquinas redondeadas */
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
+            padding: 15px; /* Espacio interno para que la imagen no toque los bordes */
         }
 
         .proposal-icon {
-            width: 100%;
-            height: 100%;
-            object-fit: contain; /* 'contain' para ver el dibujo entero, 'cover' si quieres que rellene todo el cuadrado */
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
             display: block;
         }
 
-        .blue-border-title {
-            border-left: 5px solid var(--azul-propuesta);
-            padding-left: 15px;
+        .card-header-title {
             margin-bottom: 25px;
+            width: 100%;
         }
 
-        .blue-border-title h3 {
+        .card-header-title h3 {
             color: var(--azul-propuesta);
             font-weight: 700;
             font-size: 1.5rem;
-            margin-bottom: 0;
+            margin: 0;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
         }
 
-        .proposal-list { list-style: none; padding: 0; margin: 0; }
+        /* Línea decorativa central en lugar de borde lateral para mantener simetría */
+        .card-header-title h3::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 25%;
+            width: 50%;
+            height: 3px;
+            background-color: var(--azul-propuesta);
+            border-radius: 2px;
+        }
+
+        /* Lista alineada a la izquierda pero contenedor centrado */
+        .proposal-list { 
+            list-style: none; 
+            padding: 0; 
+            margin: 0; 
+            text-align: left; 
+            display: inline-block; /* Para que el bloque de la lista se mantenga compacto */
+        }
+
         .proposal-list li {
             margin-bottom: 12px;
             font-size: 1.05rem;
@@ -133,7 +150,7 @@
             content: "✓";
             color: var(--verde-primario);
             font-weight: bold;
-            margin-right: 10px;
+            margin-right: 12px;
         }
 
     </style>
@@ -182,10 +199,10 @@
                 
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
                     <div class="proposal-card">
-                        <div class="icon-container">
+                        <div class="icon-wrapper">
                             <img src="iconosSobreNos/iconito1.png" alt="Propuesta de Valor" class="proposal-icon">
                         </div>
-                        <div class="blue-border-title">
+                        <div class="card-header-title">
                             <h3>Propuesta de Valor</h3>
                         </div>
                         <ul class="proposal-list">
@@ -198,10 +215,10 @@
 
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
                     <div class="proposal-card">
-                        <div class="icon-container">
+                        <div class="icon-wrapper">
                             <img src="iconosSobreNos/iconito2.png" alt="Funcionamiento" class="proposal-icon">
                         </div>
-                        <div class="blue-border-title">
+                        <div class="card-header-title">
                             <h3>¿Cómo funciona?</h3>
                         </div>
                         <ul class="proposal-list">
@@ -215,10 +232,10 @@
 
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
                     <div class="proposal-card">
-                        <div class="icon-container">
+                        <div class="icon-wrapper">
                             <img src="iconosSobreNos/iconito3.png" alt="Diferencial" class="proposal-icon">
                         </div>
-                        <div class="blue-border-title">
+                        <div class="card-header-title">
                             <h3>¿Por qué elegirnos?</h3>
                         </div>
                         <ul class="proposal-list">
@@ -231,10 +248,6 @@
                 </div>
 
             </div>
-
-            <div class="text-center mt-5" data-aos="fade-up">
-                <img src="https://illustrations.popsy.co/purple/success.svg" alt="Resultados" style="max-width: 250px;" class="mt-4">
-            </div>
         </div>
     </section>
 
@@ -242,11 +255,10 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 1000, once: true });
-        
         fetch('nav.html')
             .then(res => res.text())
             .then(data => document.getElementById('menu-placeholder').innerHTML = data)
-            .catch(err => console.warn("Asegúrate de que nav.html exista para ver el menú."));
+            .catch(err => console.warn("Nav.html no encontrado."));
     </script>
 </body>
 </html>
