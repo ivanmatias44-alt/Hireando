@@ -17,6 +17,7 @@
             --gris-fondo: #f8f9fa;
         }
         
+        /* Poppins Regular para todo el documento */
         * {
             font-family: 'Poppins', sans-serif !important;
             font-weight: 400;
@@ -38,7 +39,7 @@
             color: var(--violeta-fuerte);
         }
 
-        /* ESTILO ÚNICO DE TARJETAS (LAYOUT DE LA IMAGEN) */
+        /* LAYOUT DE TARJETAS UNIFICADO */
         .proposal-card {
             background: white;
             border-radius: 25px;
@@ -58,22 +59,25 @@
             box-shadow: 0 20px 40px rgba(107, 66, 193, 0.1);
         }
 
+        /* Contenedor circular para iconos (Estrategia de centrado total) */
         .icon-wrapper {
             width: 100px;
             height: 100px;
-            background-color: rgba(102, 194, 102, 0.12);
+            background-color: rgba(102, 194, 102, 0.12); /* Fondo verde claro suave */
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 25px;
             padding: 12px;
+            overflow: hidden;
         }
 
         .proposal-icon {
             width: 100%;
             height: 100%;
             object-fit: contain;
+            display: block;
         }
 
         .card-header-title {
@@ -83,7 +87,7 @@
 
         .card-header-title h3 {
             color: var(--violeta-fuerte);
-            font-weight: 600;
+            font-weight: 600; /* SemiBold para títulos de card */
             font-size: 1.5rem;
             margin: 0;
             position: relative;
@@ -91,6 +95,7 @@
             padding-bottom: 10px;
         }
 
+        /* Subrayado central verde */
         .card-header-title h3::after {
             content: "";
             position: absolute;
@@ -118,6 +123,7 @@
             align-items: center;
         }
 
+        /* Checkmark verde */
         .proposal-list li::before {
             content: "✓";
             color: var(--verde-fuerte);
@@ -144,7 +150,7 @@
             <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
                 <div class="proposal-card">
                     <div class="icon-wrapper">
-                        <img src="https://illustrations.popsy.co/purple/rocket.svg" alt="Hireando" class="proposal-icon">
+                        <img src="iconosSobreNos/iconito5.png" alt="Hireando" class="proposal-icon">
                     </div>
                     <div class="card-header-title">
                         <h3>¿Qué es Hireando?</h3>
@@ -156,7 +162,7 @@
             <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
                 <div class="proposal-card">
                     <div class="icon-wrapper">
-                        <img src="https://illustrations.popsy.co/purple/searching.svg" alt="Desafío" class="proposal-icon">
+                        <img src="iconosSobreNos/iconito6.png" alt="Desafío" class="proposal-icon">
                     </div>
                     <div class="card-header-title">
                         <h3>Desafío</h3>
@@ -172,7 +178,7 @@
             <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
                 <div class="proposal-card">
                     <div class="icon-wrapper">
-                        <img src="https://illustrations.popsy.co/purple/solution.svg" alt="Solución" class="proposal-icon">
+                        <img src="iconosSobreNos/iconito7.png" alt="Solución" class="proposal-icon">
                     </div>
                     <div class="card-header-title">
                         <h3>Nuestra solución</h3>
@@ -251,6 +257,7 @@
     <script>
         AOS.init({ duration: 1000, once: true });
         
+        // Carga del menú nav.html
         fetch('nav.html')
             .then(res => res.text())
             .then(data => document.getElementById('menu-placeholder').innerHTML = data)
