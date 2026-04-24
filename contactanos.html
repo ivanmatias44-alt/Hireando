@@ -23,8 +23,8 @@
         }
 
         .content-wrapper {
-            flex: 1; /* Empuja el footer hacia abajo si hay poco contenido */
-            padding-bottom: 80px;
+            flex: 1;
+            padding-bottom: 50px; /* Reducido al no haber footer */
         }
 
         .form-container { 
@@ -83,8 +83,6 @@
         </div>
     </div>
 
-    <div id="footer-placeholder"></div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // Cargar el menú dinámicamente
@@ -93,14 +91,6 @@
             .then(data => {
                 document.getElementById('menu-placeholder').innerHTML = data;
             });
-
-        // Cargar el footer dinámicamente
-        fetch('footer.html')
-            .then(res => res.text())
-            .then(data => {
-                document.getElementById('footer-placeholder').innerHTML = data;
-            })
-            .catch(err => console.warn("Archivo footer.html no encontrado"));
 
         // Lógica de detección de parámetros
         window.addEventListener('DOMContentLoaded', () => {
