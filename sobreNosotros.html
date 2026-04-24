@@ -59,13 +59,12 @@
             top: -5px;
         }
 
-        /* Imágenes flotantes decorativas */
         .floating-img {
             max-width: 100%;
             filter: drop-shadow(0 10px 15px rgba(0,0,0,0.05));
         }
 
-        /* SECCIÓN 2: PROPUESTAS (Cards Estilo Imagen 2) */
+        /* SECCIÓN 2: PROPUESTAS - MODIFICADA */
         .section-proposals {
             padding: 100px 0;
             background-color: var(--gris-claro);
@@ -77,11 +76,35 @@
             padding: 40px 30px;
             height: 100%;
             box-shadow: 0 15px 35px rgba(0,0,0,0.06);
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
             border: 1px solid rgba(0,0,0,0.03);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
 
-        .proposal-card:hover { transform: translateY(-10px); }
+        .proposal-card:hover { 
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(107, 66, 193, 0.1); /* Sutil brillo violeta al hover */
+        }
+
+        /* Estilo para los iconos */
+        .icon-container {
+            width: 70px;
+            height: 70px;
+            background-color: rgba(0, 123, 255, 0.08); /* Fondo azul muy suave */
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+
+        .proposal-icon {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+        }
 
         .blue-border-title {
             border-left: 5px solid var(--azul-propuesta);
@@ -101,6 +124,16 @@
             margin-bottom: 12px;
             font-size: 1.05rem;
             color: #555;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Checkmarks elegantes para las listas */
+        .proposal-list li::before {
+            content: "✓";
+            color: var(--verde-primario);
+            font-weight: bold;
+            margin-right: 10px;
         }
 
     </style>
@@ -111,14 +144,12 @@
 
     <section class="section-talent container">
         <h2 class="section-title" data-aos="fade-up">EL TALENTO NOS HACE ÚNICOS</h2>
-        
         <div class="row align-items-center g-5">
             <div class="col-lg-7" data-aos="fade-right">
                 <div class="mb-5">
                     <h3 class="purple-heading">¿Qué es Hireando?</h3>
                     <p class="fs-5">Solución ágil de reclutamiento que conecta empresas con talento calificado de forma rápida y eficiente.</p>
                 </div>
-
                 <div class="mb-5">
                     <h3 class="purple-heading">Desafío del Reclutamiento</h3>
                     <ul class="custom-list">
@@ -127,7 +158,6 @@
                         <li>Falta de herramientas simples y efectivas</li>
                     </ul>
                 </div>
-
                 <div>
                     <h3 class="purple-heading">Nuestra solución</h3>
                     <ul class="custom-list">
@@ -138,7 +168,6 @@
                     </ul>
                 </div>
             </div>
-            
             <div class="col-lg-5 text-center" data-aos="zoom-in">
                 <img src="https://illustrations.popsy.co/purple/work-from-home.svg" alt="Talento Hireando" class="floating-img">
             </div>
@@ -150,8 +179,12 @@
             <h2 class="section-title" data-aos="fade-up">CLAVES DE LA PROPUESTA DE TRABAJO</h2>
             
             <div class="row g-4 justify-content-center">
+                
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="proposal-card text-start">
+                    <div class="proposal-card">
+                        <div class="icon-container">
+                            <img src="iconosSobreNos/iconito1.png" alt="Propuesta de Valor" class="proposal-icon">
+                        </div>
                         <div class="blue-border-title">
                             <h3>Propuesta de Valor</h3>
                         </div>
@@ -164,7 +197,10 @@
                 </div>
 
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="proposal-card text-start">
+                    <div class="proposal-card">
+                        <div class="icon-container">
+                            <img src="iconosSobreNos/iconito2.png" alt="Funcionamiento" class="proposal-icon">
+                        </div>
                         <div class="blue-border-title">
                             <h3>¿Cómo funciona?</h3>
                         </div>
@@ -178,7 +214,10 @@
                 </div>
 
                 <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-                    <div class="proposal-card text-start">
+                    <div class="proposal-card">
+                        <div class="icon-container">
+                            <img src="iconosSobreNos/iconito3.png" alt="Diferencial" class="proposal-icon">
+                        </div>
                         <div class="blue-border-title">
                             <h3>¿Por qué elegirnos?</h3>
                         </div>
@@ -190,6 +229,7 @@
                         </ul>
                     </div>
                 </div>
+
             </div>
 
             <div class="text-center mt-5" data-aos="fade-up">
@@ -203,7 +243,6 @@
     <script>
         AOS.init({ duration: 1000, once: true });
         
-        // Carga del menú
         fetch('nav.html')
             .then(res => res.text())
             .then(data => document.getElementById('menu-placeholder').innerHTML = data)
