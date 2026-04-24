@@ -1,7 +1,7 @@
 <footer class="main-footer">
     <div class="container text-center">
         <div class="footer-logo mb-4" data-aos="fade-up">
-            <img src="logo-tyme.png" alt="Tyme Logo" style="max-width: 150px;">
+            <img src="logo-tyme.png" alt="Hireando" style="max-width: 150px; filter: brightness(0) invert(1);">
         </div>
 
         <div class="footer-email mb-4" data-aos="fade-up" data-aos-delay="100">
@@ -20,7 +20,7 @@
         <hr class="footer-divider">
 
         <div class="footer-bottom py-4" data-aos="fade-up" data-aos-delay="300">
-            <p class="copyright mb-3">© Tyme 2025. Todos los derechos reservados</p>
+            <p class="copyright mb-3">© Hireando 2025. Todos los derechos reservados</p>
             <div class="legal-links">
                 <a href="#">Política de Cookies</a>
                 <span class="mx-2">|</span>
@@ -31,8 +31,15 @@
 </footer>
 
 <style>
+    :root { 
+        --v-oscuro: #6B42C1; 
+        --v-claro: #A77BE6; 
+        --verde: #2EAD5B; 
+    }
+
     .main-footer {
-        background-color: #003354; /* El azul oscuro de la imagen */
+        /* Degradado sutil usando tus dos violetas para darle profundidad */
+        background: linear-gradient(135deg, var(--v-oscuro), #5634a3);
         color: #ffffff;
         padding-top: 60px;
         font-family: 'Poppins', sans-serif !important;
@@ -42,12 +49,12 @@
         color: #ffffff;
         text-decoration: none;
         font-size: 1.2rem;
-        transition: opacity 0.3s ease;
+        font-weight: 500;
+        transition: all 0.3s ease;
     }
 
     .email-link:hover {
-        opacity: 0.8;
-        color: #ffffff;
+        color: var(--v-claro);
     }
 
     .social-icon {
@@ -56,23 +63,26 @@
         justify-content: center;
         width: 45px;
         height: 45px;
-        border: 1px solid #48c78e; /* El color verde agua de los iconos */
+        /* Usando el Verde Primario de tu paleta */
+        border: 2px solid var(--verde);
         border-radius: 50%;
-        color: #48c78e;
+        color: var(--verde);
         text-decoration: none;
         margin: 0 10px;
         font-size: 1.2rem;
         transition: all 0.3s ease;
+        background: transparent;
     }
 
     .social-icon:hover {
-        background-color: #48c78e;
-        color: #003354;
+        background-color: var(--verde);
+        color: #ffffff;
         transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(46, 173, 91, 0.3);
     }
 
     .footer-divider {
-        border-top: 1px solid rgba(255,255,255,0.1);
+        border-top: 1px solid rgba(255,255,255,0.15);
         max-width: 800px;
         margin: 0 auto;
     }
@@ -84,15 +94,17 @@
 
     .legal-links a {
         color: #ffffff;
-        text-decoration: underline;
+        text-decoration: none;
         font-size: 0.9rem;
-        transition: opacity 0.3s ease;
+        opacity: 0.8;
+        transition: all 0.3s ease;
     }
 
     .legal-links a:hover {
-        opacity: 0.7;
+        opacity: 1;
+        text-decoration: underline;
+        color: var(--v-claro);
     }
 
-    /* Ajuste para Font Awesome si no lo tienes en el head */
     @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css');
 </style>
