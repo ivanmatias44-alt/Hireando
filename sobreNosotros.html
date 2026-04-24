@@ -9,36 +9,36 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         :root { 
-            --verde-primario: #2EAD5B; 
-            --violeta-principal: #6B42C1; 
-            --azul-propuesta: #007bff;
-            --gris-oscuro: #333333; 
-            --gris-claro: #fcfcfc;
+            /* Paleta de colores actualizada según imagen */
+            --verde-fuerte: #2EAD5B; 
+            --verde-claro: #66C266;
+            --violeta-fuerte: #6B42C1; 
+            --violeta-suave: #A77BE6;
+            --gris-texto: #4A4A4A; 
+            --gris-fondo: #f8f9fa;
         }
         
-        /* Aplicación de Poppins Regular a TODO el documento */
         * {
             font-family: 'Poppins', sans-serif !important;
-            font-weight: 400; /* Regular por defecto */
+            font-weight: 400;
         }
 
         body { 
-            color: var(--gris-oscuro); 
+            color: var(--gris-texto); 
             background-color: #fff;
             line-height: 1.6;
         }
 
-        /* Pesos específicos solo para títulos para mantener la jerarquía visual */
         h2.section-title {
             font-weight: 700;
             font-size: 2.5rem;
             text-align: center;
             margin-bottom: 3rem;
-            color: var(--gris-oscuro);
+            color: var(--violeta-fuerte); /* Color principal de marca */
         }
 
         .purple-heading {
-            color: var(--violeta-principal);
+            color: var(--violeta-fuerte);
             font-weight: 600;
             font-size: 1.8rem;
             margin-bottom: 1rem;
@@ -53,10 +53,11 @@
             padding-left: 25px;
             margin-bottom: 10px;
             font-size: 1.1rem;
+            color: var(--gris-texto);
         }
         .custom-list li::before {
             content: "•";
-            color: var(--verde-primario);
+            color: var(--verde-fuerte);
             font-weight: bold;
             font-size: 1.5rem;
             position: absolute;
@@ -69,10 +70,10 @@
             filter: drop-shadow(0 10px 15px rgba(0,0,0,0.05));
         }
 
-        /* SECCIÓN 2: PROPUESTAS - CENTRADO TOTAL */
+        /* SECCIÓN 2: PROPUESTAS */
         .section-proposals {
             padding: 100px 0;
-            background-color: var(--gris-claro);
+            background-color: var(--gris-fondo);
         }
 
         .proposal-card {
@@ -80,9 +81,9 @@
             border-radius: 25px;
             padding: 40px 30px;
             height: 100%;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.04);
             transition: all 0.3s ease;
-            border: 1px solid rgba(0,0,0,0.03);
+            border: 1px solid rgba(0,0,0,0.02);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -91,19 +92,19 @@
 
         .proposal-card:hover { 
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 123, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(107, 66, 193, 0.1); /* Brillo violeta suave */
         }
 
         .icon-wrapper {
             width: 100px;
             height: 100px;
-            background-color: rgba(0, 123, 255, 0.08);
+            background-color: rgba(102, 194, 102, 0.15); /* Verde claro con transparencia */
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 25px;
-            padding: 10px;
+            padding: 12px;
             overflow: hidden;
         }
 
@@ -120,7 +121,7 @@
         }
 
         .card-header-title h3 {
-            color: var(--azul-propuesta);
+            color: var(--violeta-fuerte);
             font-weight: 600;
             font-size: 1.5rem;
             margin: 0;
@@ -136,7 +137,7 @@
             left: 20%;
             width: 60%;
             height: 3px;
-            background-color: var(--azul-propuesta);
+            background-color: var(--verde-fuerte); /* Contraste verde para el subrayado */
             border-radius: 2px;
         }
 
@@ -151,14 +152,14 @@
         .proposal-list li {
             margin-bottom: 12px;
             font-size: 1.05rem;
-            color: #555;
+            color: var(--gris-texto);
             display: flex;
             align-items: center;
         }
 
         .proposal-list li::before {
             content: "✓";
-            color: var(--verde-primario);
+            color: var(--verde-fuerte);
             font-weight: 700;
             margin-right: 12px;
         }
