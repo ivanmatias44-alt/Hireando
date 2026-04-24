@@ -33,7 +33,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Mensaje</label>
-                        <textarea name="mensaje" class="form-control" rows="4" required></textarea>
+                        <textarea id="mensajeInput" name="mensaje" class="form-control" rows="4" required></textarea>
                     </div>
                     <button type="submit" class="btn-enviar">Enviar Mensaje</button>
                 </form>
@@ -43,7 +43,25 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        fetch('nav.html').then(res => res.text()).then(data => document.getElementById('menu-placeholder').innerHTML = data);
+        // Cargar el menú dinámicamente
+        fetch('nav.html')
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById('menu-placeholder').innerHTML = data;
+            });
+
+        // Lógica de detección de parámetros
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const source = urlParams.get('ref');
+
+            if (source === 'planes') {
+                const mensajeArea = document.getElementById('mensajeInput');
+                if (mensajeArea) {
+                    mensajeArea.value = "Hola, estuve viendo los planes de Hireando y me gustaría recibir más información.\n¿Podrían ayudarme a encontrar el plan ideal para mi búsqueda?";
+                }
+            }
+        });
     </script>
 </body>
 </html>
