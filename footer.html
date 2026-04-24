@@ -1,6 +1,6 @@
 <footer class="main-footer">
     <div class="container text-center">
-        <div class="footer-logo mb-4" data-aos="fade-up">
+        <div class="footer-logo-container mb-4" data-aos="fade-up">
             <img src="logoTransparente.png" alt="Hireando" class="logo-footer">
         </div>
 
@@ -44,16 +44,35 @@
         font-family: 'Poppins', sans-serif !important;
     }
 
-    .logo-footer {
-        /* Control de tamaño mediante scale */
-        transform: scale(1.2); 
-        display: inline-block;
-        height: auto;
-        /* Filtro blanco por si el logo original es oscuro */
-        filter: brightness(0) invert(1);
-        margin: 20px 0;
+    /* NUEVA ESTRATEGIA PARA EL LOGO */
+    .footer-logo-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* Definimos un área máxima razonable para el logo */
+        max-width: 200px; 
+        height: 80px;     
+        margin: 0 auto;   
+        overflow: visible; /* Importante para que scale no corte la imagen */
     }
 
+    .logo-footer {
+        /* La imagen se ajusta al contenedor */
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+        display: block;
+
+        /* AJUSTE FINO CON SCALE */
+        /* Usa valores cercanos a 1.0 (ej: 0.9 para achicar un poco, 1.1 para agrandar un poco) */
+        transform: scale(1.0); 
+        
+        /* Filtro blanco */
+        filter: brightness(0) invert(1);
+    }
+
+    /* ... Resto de estilos igual ... */
     .email-link {
         color: #ffffff;
         text-decoration: none;
