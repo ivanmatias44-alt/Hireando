@@ -3,125 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contactanos | Hireando</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <title>Hireando | Reclutamiento Ágil & Accesible</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;1,600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root { 
             --verde-primario: #2EAD5B; 
+            --verde-claro: #66C266; 
             --violeta-oscuro: #6B42C1; 
+            --violeta-claro: #A77BE6; 
             --gris-texto: #4A4A4A; 
         }
         
         body { 
             font-family: 'Poppins', sans-serif; 
-            background-color: #f9f9f9; 
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh; /* Asegura que el footer se empuje al fondo */
+            color: var(--gris-texto); 
+            overflow-x: hidden;
             margin: 0;
+            padding: 0;
         }
 
-        .content-wrapper {
-            flex: 1; /* Esto hace que el contenido crezca y el footer baje */
-            padding-bottom: 50px; 
+        .hero { 
+            position: relative; 
+            padding: 80px 0; 
+            background: linear-gradient(135deg, #ffffff 60%, #f9f9f9 100%); 
+            display: flex; 
+            align-items: center; 
+            min-height: calc(100vh - 80px); /* Ajusta según el alto de tu nav */
         }
 
-        .form-container { 
-            background: white; 
-            padding: 40px; 
-            border-radius: 20px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
-            margin-top: 50px; 
+        .hero h1 { 
+            font-weight: 600; 
+            font-style: italic; 
+            font-size: 3.5rem; 
+            line-height: 1.1; 
         }
 
-        .btn-enviar { 
-            background-color: var(--violeta-oscuro); 
+        .text-purple { color: var(--violeta-oscuro); }
+        .text-green { color: var(--verde-primario); }
+        
+        .hero p { font-size: 1.2rem; margin: 20px 0; max-width: 450px; }
+        
+        .btn-servicios { 
+            background-color: var(--verde-primario); 
             color: white; 
-            border: none; 
-            padding: 10px 30px; 
             border-radius: 8px; 
+            padding: 12px 30px; 
+            text-decoration: none; 
+            display: inline-block; 
+            font-weight: 600; 
+            transition: 0.3s; 
+        }
+        
+        .btn-servicios:hover { 
+            background-color: var(--verde-claro); 
+            transform: translateY(-2px); 
+            color: white; 
+        }
+
+        .img-hero { 
+            border-radius: 0 0 0 100px; 
+            object-fit: cover; 
             width: 100%; 
-            transition: all 0.3s ease;
+            height: 500px; 
+            box-shadow: -20px 20px 0px var(--violeta-claro); 
         }
 
-        .btn-enviar:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
+        @media (max-width: 991px) {
+            .hero { padding: 40px 0; }
+            .hero h1 { font-size: 2.5rem; }
         }
-
-        .nav-link { color: var(--gris-texto); font-weight: 500; margin: 0 10px; }
-        .btn-contactanos { background-color: var(--verde-primario); color: white; border-radius: 50px; padding: 8px 25px; border: none; }
     </style>
 </head>
 <body>
-    
-    <header id="menu-placeholder"></header>
+    <div id="menu-placeholder"></div>
 
-    <main class="content-wrapper">
+    <section class="hero">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-6 form-container">
-                    <h2 class="text-center mb-4" style="color: var(--violeta-oscuro);">¡Hablemos!</h2>
-                    <form name="contacto" method="POST" data-netlify="true">
-                        <div class="mb-3">
-                            <label class="form-label">Nombre</label>
-                            <input type="text" name="nombre" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Email</label>
-                            <input type="email" name="email" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Mensaje</label>
-                            <textarea id="mensajeInput" name="mensaje" class="form-control" rows="4" required></textarea>
-                        </div>
-                        <button type="submit" class="btn-enviar">Enviar Mensaje</button>
-                    </form>
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <h1>
+                        <span class="text-purple">Simple. Rápido.</span><br>
+                        <span class="text-green">Hireando.</span>
+                    </h1>
+                    <p>Encontramos el talento que tu empresa necesita.</p>
+                    <a href="servicios.html" class="btn-servicios">CONOCÉ NUESTROS SERVICIOS</a>
+                </div>
+                <div class="col-lg-6 mt-5 mt-lg-0" data-aos="fade-left">
+                    <img src="fotoParaIndex.jpeg" alt="Equipo Hireando" class="img-hero">
                 </div>
             </div>
         </div>
-    </main>
-
-    <footer id="footer-placeholder"></footer>
+    </section>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        /**
-         * Función para cargar componentes externos de forma reutilizable
-         */
-        async function loadComponent(url, elementId) {
-            try {
-                const response = await fetch(url);
-                if (!response.ok) throw new Error(`No se pudo cargar ${url}`);
-                const html = await response.text();
-                document.getElementById(elementId).innerHTML = html;
-            } catch (error) {
-                console.error("Error cargando componente:", error);
-            }
-        }
-
-        // Ejecutar cargas al iniciar el DOM
-        document.addEventListener('DOMContentLoaded', () => {
-            // Cargar Nav y Footer
-            loadComponent('nav.html', 'menu-placeholder');
-            loadComponent('footer.html', 'footer-placeholder');
-
-            // Lógica de parámetros de URL (Sticky form)
-            const urlParams = new URLSearchParams(window.location.search);
-            const source = urlParams.get('ref');
-
-            if (source === 'planes') {
-                const mensajeArea = document.getElementById('mensajeInput');
-                if (mensajeArea) {
-                    mensajeArea.value = "Hola, estuve viendo los planes de Hireando y me gustaría recibir más información.\n¿Podrían ayudarme a encontrar el plan ideal para mi búsqueda?";
-                }
-            }
-        });
+        AOS.init({ duration: 1000, once: true });
+        
+        // Carga del menú
+        fetch('nav.html')
+            .then(res => res.text())
+            .then(data => { 
+                document.getElementById('menu-placeholder').innerHTML = data; 
+            })
+            .catch(err => console.error('Error cargando el nav:', err));
     </script>
 </body>
 </html>
