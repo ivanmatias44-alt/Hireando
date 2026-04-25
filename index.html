@@ -24,6 +24,10 @@
             overflow-x: hidden;
             margin: 0;
             padding: 0;
+            /* Flexbox para empujar el footer al fondo si hay poco contenido */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         .hero { 
@@ -32,7 +36,7 @@
             background: linear-gradient(135deg, #ffffff 60%, #f9f9f9 100%); 
             display: flex; 
             align-items: center; 
-            min-height: calc(100vh - 80px); /* Ajusta según el alto de tu nav */
+            flex: 1; /* Permite que el hero ocupe el espacio disponible */
         }
 
         .hero h1 { 
@@ -79,9 +83,9 @@
     </style>
 </head>
 <body>
-    <div id="menu-placeholder"></div>
+    <header id="menu-placeholder"></header>
 
-    <section class="hero">
+    <main class="hero">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6" data-aos="fade-right">
@@ -97,20 +101,36 @@
                 </div>
             </div>
         </div>
-    </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
     <script>
+        // Inicializar animaciones
         AOS.init({ duration: 1000, once: true });
         
-        // Carga del menú
-        fetch('nav.html')
-            .then(res => res.text())
-            .then(data => { 
-                document.getElementById('menu-placeholder').innerHTML = data; 
-            })
-            .catch(err => console.error('Error cargando el nav:', err));
+        /**
+         * Función reutilizable para cargar componentes HTML
+         */
+        async function incluirComponente(url, elementId) {
+            try {
+                const res = await fetch(url);
+                if (!res.ok) throw new Error(`Error al cargar ${url}`);
+                const html = await res.text();
+                document.getElementById(elementId).innerHTML = html;
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        // Cargar Nav y Footer al cargar la página
+        document.addEventListener('DOMContentLoaded', () => {
+            incluirComponente('nav.html', 'menu-placeholder');
+            incluirComponente('footer.html', 'footer-placeholder');
+        });
     </script>
 </body>
 </html>
