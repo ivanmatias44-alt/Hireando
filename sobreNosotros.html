@@ -21,14 +21,14 @@
             --gris-fondo: #f8f9fa;
         }
         
-        /* 2. MODIFICADO: Evitamos que Poppins rompa la fuente de los iconos */
+        /* 2. AJUSTE DE FUENTE: Quitamos el !important para no romper iconos */
         * {
             font-family: 'Poppins', sans-serif;
             font-weight: 400;
         }
 
-        /* Aseguramos que los iconos mantengan su propia fuente */
-        .fab, .fas, .far, .fa {
+        /* Forzamos a que los iconos usen su propia fuente de Font Awesome */
+        .fab, .fas, .far, .fa-brands, .fa-solid {
             font-family: "Font Awesome 6 Brands", "Font Awesome 6 Free" !important;
         }
 
@@ -41,12 +41,17 @@
             min-height: 100vh;
             margin: 0;
         }
-        
-        /* ... resto de tu CSS anterior se mantiene igual ... */
 
-        main { flex: 1; }
+        main {
+            flex: 1;
+        }
+
         .section-padding { padding: 80px 0; }
-        .title-semibold { font-weight: 600 !important; }
+
+        .title-semibold {
+            font-weight: 600 !important;
+        }
+
         h2.section-title {
             font-size: 2.5rem;
             text-align: center;
@@ -56,6 +61,7 @@
             padding-bottom: 15px;
             display: block;
         }
+
         h2.section-title::after {
             content: "";
             position: absolute;
@@ -67,6 +73,7 @@
             background-color: var(--verde-fuerte);
             border-radius: 2px;
         }
+
         .proposal-card {
             background: white;
             border-radius: 25px;
@@ -80,10 +87,12 @@
             align-items: center;
             text-align: center;
         }
+
         .proposal-card:hover { 
             transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(107, 66, 193, 0.1);
         }
+
         .icon-wrapper {
             width: 100px;
             height: 100px;
@@ -96,16 +105,19 @@
             padding: 12px;
             overflow: hidden;
         }
+
         .proposal-icon {
             width: 100%;
             height: 100%;
             object-fit: contain;
             display: block;
         }
+
         .card-header-title {
             margin-bottom: 25px;
             width: 100%;
         }
+
         .card-header-title h3 {
             color: var(--violeta-fuerte);
             font-weight: 600; 
@@ -115,6 +127,7 @@
             display: inline-block;
             padding-bottom: 10px;
         }
+
         .card-header-title h3::after {
             content: "";
             position: absolute;
@@ -125,6 +138,7 @@
             background-color: var(--verde-fuerte);
             border-radius: 2px;
         }
+
         .proposal-list { 
             list-style: none; 
             padding: 0; 
@@ -132,6 +146,7 @@
             text-align: left; 
             display: inline-block; 
         }
+
         .proposal-list li {
             margin-bottom: 12px;
             font-size: 1.05rem;
@@ -139,12 +154,14 @@
             display: flex;
             align-items: center;
         }
+
         .proposal-list li::before {
             content: "✓";
             color: var(--verde-fuerte);
             font-weight: 700;
             margin-right: 12px;
         }
+
         .simple-text {
             font-size: 1.05rem;
             color: var(--gris-texto);
@@ -153,13 +170,117 @@
     </style>
 </head>
 <body>
+
     <header id="menu-placeholder"></header>
 
     <main>
         <section class="section-padding container">
             <h2 class="section-title title-semibold" data-aos="fade-up">EL TALENTO NOS HACE ÚNICOS</h2>
+            
             <div class="row g-4 justify-content-center">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="proposal-card">
+                        <div class="icon-wrapper">
+                            <img src="iconosSobreNos/iconito5.png" alt="Hireando" class="proposal-icon">
+                        </div>
+                        <div class="card-header-title">
+                            <h3>¿Qué es Hireando?</h3>
+                        </div>
+                        <p class="simple-text">Solución ágil de reclutamiento que conecta empresas con talento calificado de forma rápida y eficiente.</p>
+                    </div>
                 </div>
+
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="proposal-card">
+                        <div class="icon-wrapper">
+                            <img src="iconosSobreNos/iconito6.png" alt="Desafío" class="proposal-icon">
+                        </div>
+                        <div class="card-header-title">
+                            <h3>Desafío</h3>
+                        </div>
+                        <ul class="proposal-list">
+                            <li>Procesos largos y costosos</li>
+                            <li>Dificultad para encontrar perfiles</li>
+                            <li>Falta de herramientas simples</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="proposal-card">
+                        <div class="icon-wrapper">
+                            <img src="iconosSobreNos/iconito7.png" alt="Solución" class="proposal-icon">
+                        </div>
+                        <div class="card-header-title">
+                            <h3>Nuestra solución</h3>
+                        </div>
+                        <ul class="proposal-list">
+                            <li>Búsquedas rápidas y efectivas</li>
+                            <li>Base de talento validado</li>
+                            <li>Acompañamiento personalizado</li>
+                            <li>Metodología transparente</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section-padding" style="background-color: var(--gris-fondo);">
+            <div class="container">
+                <h2 class="section-title title-semibold" data-aos="fade-up">CLAVES DE LA PROPUESTA DE TRABAJO</h2>
+                
+                <div class="row g-4 justify-content-center">
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="proposal-card">
+                            <div class="icon-wrapper">
+                                <img src="iconosSobreNos/iconito1.png" alt="Valor" class="proposal-icon">
+                            </div>
+                            <div class="card-header-title">
+                                <h3>Propuesta de Valor</h3>
+                            </div>
+                            <ul class="proposal-list">
+                                <li>Ahorro de tiempo en selección</li>
+                                <li>Reducción de costos</li>
+                                <li>Mejores contrataciones</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                        <div class="proposal-card">
+                            <div class="icon-wrapper">
+                                <img src="iconosSobreNos/iconito2.png" alt="Funcionamiento" class="proposal-icon">
+                            </div>
+                            <div class="card-header-title">
+                                <h3>¿Cómo funciona?</h3>
+                            </div>
+                            <ul class="proposal-list">
+                                <li>Relevamiento de la necesidad</li>
+                                <li>Búsqueda y filtrado</li>
+                                <li>Presentación de candidatos</li>
+                                <li>Acompañamiento integral</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                        <div class="proposal-card">
+                            <div class="icon-wrapper">
+                                <img src="iconosSobreNos/iconito3.png" alt="Elegirnos" class="proposal-icon">
+                            </div>
+                            <div class="card-header-title">
+                                <h3>¿Por qué elegirnos?</h3>
+                            </div>
+                            <ul class="proposal-list">
+                                <li>Cercanía</li>
+                                <li>Rapidez</li>
+                                <li>Flexibilidad</li>
+                                <li>Enfoque en resultados</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
@@ -170,6 +291,9 @@
     <script>
         AOS.init({ duration: 1000, once: true });
 
+        /**
+         * Carga de componentes externos
+         */
         async function loadComponent(url, elementId) {
             try {
                 const response = await fetch(url);
@@ -181,6 +305,7 @@
             }
         }
 
+        // Ejecutar al cargar el DOM
         document.addEventListener('DOMContentLoaded', () => {
             loadComponent('nav.html', 'menu-placeholder');
             loadComponent('footer.html', 'footer-placeholder');
