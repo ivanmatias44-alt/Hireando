@@ -53,7 +53,6 @@
         .nav-link { color: var(--gris-texto); font-weight: 500; margin: 0 10px; }
         .btn-contactanos { background-color: var(--verde-primario); color: white; border-radius: 50px; padding: 8px 25px; border: none; }
         
-        /* Estilo para el contador de caracteres */
         .char-counter {
             font-size: 0.85rem;
             color: #6c757d;
@@ -84,7 +83,7 @@
                                    pattern="^[a-zA-ZÀ-ÿ\s]+$"
                                    title="Solo se permiten letras y espacios">
                             <div class="invalid-feedback">
-                                Por favor, ingresa un nombre válido (solo letras y espacios, mín. 3 caracteres).
+                                El nombre solo puede contener letras y espacios.
                             </div>
                         </div>
 
@@ -98,7 +97,7 @@
                                    maxlength="100"
                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                             <div class="invalid-feedback">
-                                Ingresa un correo electrónico válido (ejemplo@dominio.com).
+                                Ingresa un correo electrónico válido.
                             </div>
                         </div>
 
@@ -110,10 +109,12 @@
                                       rows="4" 
                                       required 
                                       minlength="10" 
-                                      maxlength="1000"></textarea>
+                                      maxlength="1000"
+                                      pattern="^[a-zA-ZÀ-ÿ\s\.,!?]+$"
+                                      title="Solo se permiten palabras y puntuación básica"></textarea>
                             <div class="d-flex justify-content-between mt-1">
-                                <div class="invalid-feedback" style="display: block; visibility: hidden;" id="mensaje-error">
-                                    El mensaje no puede contener caracteres de código (< o >).
+                                <div class="invalid-feedback" id="mensaje-error">
+                                    El mensaje solo debe contener palabras y signos básicos (.,!?).
                                 </div>
                                 <div class="char-counter" id="charCount">0 / 1000</div>
                             </div>
@@ -130,23 +131,18 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // 1. CARGA DE COMPONENTES
+        // Carga de componentes
         function loadComponent(url, elementId) {
             fetch(url)
-                .then(res => {
-                    if (!res.ok) throw new Error(`Error al cargar ${url}`);
-                    return res.text();
-                })
-                .then(data => {
-                    document.getElementById(elementId).innerHTML = data;
-                })
+                .then(res => res.ok ? res.text() : Promise.reject())
+                .then(data => { document.getElementById(elementId).innerHTML = data; })
                 .catch(err => console.error(err));
         }
 
         loadComponent('nav.html', 'menu-placeholder');
         loadComponent('footer.html', 'footer-placeholder');
 
-        // 2. VALIDACIÓN DE BOOTSTRAP AL ENVIAR
+        // Validación de Bootstrap
         (() => {
           'use strict'
           const forms = document.querySelectorAll('.needs-validation')
@@ -161,49 +157,38 @@
           })
         })()
 
-        // 3. SANITIZACIÓN Y LIMPIEZA EN TIEMPO REAL
-        const nombreInput = document.getElementById('nombre');
-        const emailInput = document.getElementById('email');
-        const mensajeInput = document.getElementById('mensajeInput');
-        const charCount = document.getElementById('charCount');
+        // Filtro de caracteres prohibidos en tiempo real (Sanitización)
+        const inputsRestringidos = {
+            'nombre': /[^a-zA-ZÀ-ÿ\s]/g,
+            'mensajeInput': /[^a-zA-ZÀ-ÿ\s\.,!?\n]/g // Permite letras, espacios, saltos de línea y puntos/comas
+        };
 
-        // Nombre: Solo letras y espacios
-        nombreInput.addEventListener('input', (e) => {
-            e.target.value = e.target.value.replace(/[^a-zA-ZÀ-ÿ\s]/g, '');
+        Object.keys(inputsRestringidos).forEach(id => {
+            const el = document.getElementById(id);
+            el.addEventListener('input', (e) => {
+                const regex = inputsRestringidos[id];
+                // Si el usuario pega o escribe un carácter raro, se borra automáticamente
+                e.target.value = e.target.value.replace(regex, '');
+                
+                // Actualizar contador si es el mensaje
+                if (id === 'mensajeInput') {
+                    document.getElementById('charCount').textContent = `${e.target.value.length} / 1000`;
+                }
+            });
         });
 
-        // Email: Bloquear espacios y caracteres peligrosos de inmediato
-        emailInput.addEventListener('input', (e) => {
+        // Bloqueo de espacios y caracteres peligrosos en Email
+        document.getElementById('email').addEventListener('input', (e) => {
             e.target.value = e.target.value.replace(/[<>\s]/g, '');
         });
 
-        // Mensaje: Bloquear etiquetas HTML y actualizar contador
-        mensajeInput.addEventListener('input', (e) => {
-            const originalValue = e.target.value;
-            // Eliminamos < y > para evitar inyecciones básicas
-            const cleanedValue = originalValue.replace(/[<>]/g, '');
-            
-            if (originalValue !== cleanedValue) {
-                e.target.value = cleanedValue;
-                document.getElementById('mensaje-error').style.visibility = 'visible';
-            } else {
-                document.getElementById('mensaje-error').style.visibility = 'hidden';
-            }
-
-            const currentLength = e.target.value.length;
-            charCount.textContent = `${currentLength} / 1000`;
-        });
-
-        // 4. LÓGICA DE PARÁMETROS URL (REF)
+        // Lógica de parámetros URL
         window.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
-            const source = urlParams.get('ref');
-
-            if (source === 'planes') {
-                if (mensajeInput) {
-                    mensajeInput.value = "Hola, estuve viendo los planes de Hireando y me gustaría recibir más información.\n¿Podrían ayudarme a encontrar el plan ideal para mi búsqueda?";
-                    mensajeInput.dispatchEvent(new Event('input'));
-                }
+            if (urlParams.get('ref') === 'planes') {
+                const msg = document.getElementById('mensajeInput');
+                msg.value = "Hola estuve viendo los planes de Hireando y me gustaria recibir mas informacion";
+                msg.dispatchEvent(new Event('input'));
             }
         });
     </script>
