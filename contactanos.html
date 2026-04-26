@@ -56,6 +56,13 @@
             font-size: 0.85rem;
             color: #6c757d;
         }
+
+        /* Estilo para avisos de caracteres bloqueados */
+        .security-notice {
+            font-size: 0.75rem;
+            color: #dc3545;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -94,9 +101,10 @@
                                    class="form-control" 
                                    required
                                    maxlength="100"
-                                   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+                                   pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                                   title="Formato de email válido (ejemplo@correo.com)">
                             <div class="invalid-feedback">
-                                Ingresa un correo electrónico válido (sin espacios ni símbolos peligrosos).
+                                Ingresa un correo electrónico válido (sin símbolos especiales).
                             </div>
                         </div>
 
@@ -109,15 +117,13 @@
                                       required 
                                       minlength="10" 
                                       maxlength="1000"
-                                      title="Se permiten letras, números y puntuación básica (. , ! ? ( ) - _)"></textarea>
+                                      placeholder="Escribe aquí tu mensaje..."></textarea>
                             <div class="d-flex justify-content-between mt-1">
-                                <div class="text-danger small d-none" id="error-mensaje">
-                                    Caracteres no permitidos detectados y eliminados.
-                                </div>
+                                <span id="security-alert" class="security-notice">Caracteres no permitidos eliminados por seguridad.</span>
                                 <div class="char-counter ms-auto" id="charCount">0 / 1000</div>
                             </div>
                             <div class="invalid-feedback">
-                                El mensaje es obligatorio (mínimo 10 caracteres).
+                                El mensaje debe tener entre 10 y 1000 caracteres.
                             </div>
                         </div>
 
@@ -143,7 +149,7 @@
         loadComponent('nav.html', 'menu-placeholder');
         loadComponent('footer.html', 'footer-placeholder');
 
-        // Validación de Bootstrap
+        // Validación de Bootstrap (Submit)
         (() => {
           'use strict'
           const forms = document.querySelectorAll('.needs-validation')
@@ -159,49 +165,50 @@
         })()
 
         /**
-         * ESTRATEGIA DE SEGURIDAD: WHITELIST
-         * Filtramos caracteres en tiempo real para evitar inyecciones.
+         * LÓGICA DE SEGURIDAD - WHITELIST (LISTA BLANCA)
          */
+        
+        const securityAlert = document.getElementById('security-alert');
+
         const filtros = {
             // Nombre: Solo letras y espacios
             'nombre': /[^a-zA-ZÀ-ÿ\s]/g,
             
-            // Mensaje: Alfanuméricos + Puntuación recomendada (. , ! ? ( ) - _) + Saltos de línea
-            // Nota: Se escapan caracteres especiales en la regex [\-\(\)\?\!\._]
+            // Email: Solo letras, números, @, punto, guion y guion bajo
+            'email': /[^a-zA-Z0-9@\._\-]/g,
+            
+            // Mensaje: Alfanuméricos + Puntuación básica (. , ! ? ( ) - _) + Saltos de línea
             'mensajeInput': /[^a-zA-ZÀ-ÿ0-9\s\.\,\!\?\(\)\-\_\n]/g 
         };
 
+        // Aplicar filtros en tiempo real a todos los inputs definidos
         Object.keys(filtros).forEach(id => {
             const el = document.getElementById(id);
-            const errorMsg = document.getElementById('error-mensaje');
+            if (!el) return;
 
             el.addEventListener('input', (e) => {
                 const regex = filtros[id];
                 const originalValue = e.target.value;
                 const cleanedValue = originalValue.replace(regex, '');
                 
-                // Si el valor cambió, es porque intentaron ingresar un caracter prohibido
                 if (originalValue !== cleanedValue) {
                     e.target.value = cleanedValue;
-                    if(errorMsg) {
-                        errorMsg.classList.remove('d-none');
-                        setTimeout(() => errorMsg.classList.add('d-none'), 2000);
+                    
+                    // Mostrar alerta visual si es el mensaje o email
+                    if (securityAlert) {
+                        securityAlert.style.display = 'inline';
+                        setTimeout(() => { securityAlert.style.display = 'none'; }, 2000);
                     }
                 }
                 
-                // Actualizar contador
+                // Actualizar contador si es el mensaje
                 if (id === 'mensajeInput') {
                     document.getElementById('charCount').textContent = `${e.target.value.length} / 1000`;
                 }
             });
         });
 
-        // Limpieza estricta de Email (No permite espacios ni etiquetas)
-        document.getElementById('email').addEventListener('input', (e) => {
-            e.target.value = e.target.value.replace(/[<>"'\s\\]/g, '');
-        });
-
-        // Parámetros URL para autorelleno seguro
+        // Parámetros URL para autorelleno (Sanitizado mediante el evento input)
         window.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('ref') === 'planes') {
