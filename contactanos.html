@@ -110,11 +110,11 @@
                                       required 
                                       minlength="10" 
                                       maxlength="1000"
-                                      pattern="^[a-zA-ZÀ-ÿ\s\.,!?]+$"
-                                      title="Solo se permiten palabras y puntuación básica"></textarea>
+                                      pattern="^[a-zA-ZÀ-ÿ0-9\s\.,]+$"
+                                      title="Solo se permiten letras, números, puntos y comas"></textarea>
                             <div class="d-flex justify-content-between mt-1">
-                                <div class="invalid-feedback" id="mensaje-error">
-                                    El mensaje solo debe contener palabras y signos básicos (.,!?).
+                                <div class="invalid-feedback">
+                                    El mensaje solo permite letras, números, puntos y comas.
                                 </div>
                                 <div class="char-counter" id="charCount">0 / 1000</div>
                             </div>
@@ -157,38 +157,44 @@
           })
         })()
 
-        // Filtro de caracteres prohibidos en tiempo real (Sanitización)
-        const inputsRestringidos = {
+        // Filtro de sanitización en tiempo real
+        const filtros = {
             'nombre': /[^a-zA-ZÀ-ÿ\s]/g,
-            'mensajeInput': /[^a-zA-ZÀ-ÿ\s\.,!?\n]/g // Permite letras, espacios, saltos de línea y puntos/comas
+            // Mensaje: permite letras, números, espacios, puntos, comas y saltos de línea (\n)
+            'mensajeInput': /[^a-zA-ZÀ-ÿ0-9\s\.,\n]/g 
         };
 
-        Object.keys(inputsRestringidos).forEach(id => {
+        Object.keys(filtros).forEach(id => {
             const el = document.getElementById(id);
             el.addEventListener('input', (e) => {
-                const regex = inputsRestringidos[id];
-                // Si el usuario pega o escribe un carácter raro, se borra automáticamente
-                e.target.value = e.target.value.replace(regex, '');
+                const regex = filtros[id];
+                const originalValue = e.target.value;
+                const cleanedValue = originalValue.replace(regex, '');
                 
-                // Actualizar contador si es el mensaje
+                if (originalValue !== cleanedValue) {
+                    e.target.value = cleanedValue;
+                }
+                
                 if (id === 'mensajeInput') {
                     document.getElementById('charCount').textContent = `${e.target.value.length} / 1000`;
                 }
             });
         });
 
-        // Bloqueo de espacios y caracteres peligrosos en Email
+        // Bloqueo de caracteres peligrosos en Email
         document.getElementById('email').addEventListener('input', (e) => {
             e.target.value = e.target.value.replace(/[<>\s]/g, '');
         });
 
-        // Lógica de parámetros URL
+        // Parámetros URL
         window.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('ref') === 'planes') {
                 const msg = document.getElementById('mensajeInput');
-                msg.value = "Hola estuve viendo los planes de Hireando y me gustaria recibir mas informacion";
-                msg.dispatchEvent(new Event('input'));
+                if (msg) {
+                    msg.value = "Hola estuve viendo los planes de Hireando y me gustaria recibir mas informacion";
+                    msg.dispatchEvent(new Event('input'));
+                }
             }
         });
     </script>
