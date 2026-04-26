@@ -51,7 +51,6 @@
         }
 
         .nav-link { color: var(--gris-texto); font-weight: 500; margin: 0 10px; }
-        .btn-contactanos { background-color: var(--verde-primario); color: white; border-radius: 50px; padding: 8px 25px; border: none; }
         
         .char-counter {
             font-size: 0.85rem;
@@ -97,7 +96,7 @@
                                    maxlength="100"
                                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
                             <div class="invalid-feedback">
-                                Ingresa un correo electrónico válido.
+                                Ingresa un correo electrónico válido (sin espacios ni símbolos peligrosos).
                             </div>
                         </div>
 
@@ -110,13 +109,15 @@
                                       required 
                                       minlength="10" 
                                       maxlength="1000"
-                                      pattern="^[a-zA-ZÀ-ÿ0-9\s\.,]+$"
-                                      title="Solo se permiten letras, números, puntos y comas"></textarea>
+                                      title="Se permiten letras, números y puntuación básica (. , ! ? ( ) - _)"></textarea>
                             <div class="d-flex justify-content-between mt-1">
-                                <div class="invalid-feedback">
-                                    El mensaje solo permite letras, números, puntos y comas.
+                                <div class="text-danger small d-none" id="error-mensaje">
+                                    Caracteres no permitidos detectados y eliminados.
                                 </div>
-                                <div class="char-counter" id="charCount">0 / 1000</div>
+                                <div class="char-counter ms-auto" id="charCount">0 / 1000</div>
+                            </div>
+                            <div class="invalid-feedback">
+                                El mensaje es obligatorio (mínimo 10 caracteres).
                             </div>
                         </div>
 
@@ -157,42 +158,56 @@
           })
         })()
 
-        // Filtro de sanitización en tiempo real
+        /**
+         * ESTRATEGIA DE SEGURIDAD: WHITELIST
+         * Filtramos caracteres en tiempo real para evitar inyecciones.
+         */
         const filtros = {
+            // Nombre: Solo letras y espacios
             'nombre': /[^a-zA-ZÀ-ÿ\s]/g,
-            // Mensaje: permite letras, números, espacios, puntos, comas y saltos de línea (\n)
-            'mensajeInput': /[^a-zA-ZÀ-ÿ0-9\s\.,\n]/g 
+            
+            // Mensaje: Alfanuméricos + Puntuación recomendada (. , ! ? ( ) - _) + Saltos de línea
+            // Nota: Se escapan caracteres especiales en la regex [\-\(\)\?\!\._]
+            'mensajeInput': /[^a-zA-ZÀ-ÿ0-9\s\.\,\!\?\(\)\-\_\n]/g 
         };
 
         Object.keys(filtros).forEach(id => {
             const el = document.getElementById(id);
+            const errorMsg = document.getElementById('error-mensaje');
+
             el.addEventListener('input', (e) => {
                 const regex = filtros[id];
                 const originalValue = e.target.value;
                 const cleanedValue = originalValue.replace(regex, '');
                 
+                // Si el valor cambió, es porque intentaron ingresar un caracter prohibido
                 if (originalValue !== cleanedValue) {
                     e.target.value = cleanedValue;
+                    if(errorMsg) {
+                        errorMsg.classList.remove('d-none');
+                        setTimeout(() => errorMsg.classList.add('d-none'), 2000);
+                    }
                 }
                 
+                // Actualizar contador
                 if (id === 'mensajeInput') {
                     document.getElementById('charCount').textContent = `${e.target.value.length} / 1000`;
                 }
             });
         });
 
-        // Bloqueo de caracteres peligrosos en Email
+        // Limpieza estricta de Email (No permite espacios ni etiquetas)
         document.getElementById('email').addEventListener('input', (e) => {
-            e.target.value = e.target.value.replace(/[<>\s]/g, '');
+            e.target.value = e.target.value.replace(/[<>"'\s\\]/g, '');
         });
 
-        // Parámetros URL
+        // Parámetros URL para autorelleno seguro
         window.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             if (urlParams.get('ref') === 'planes') {
                 const msg = document.getElementById('mensajeInput');
                 if (msg) {
-                    msg.value = "Hola estuve viendo los planes de Hireando y me gustaria recibir mas informacion";
+                    msg.value = "Hola, estuve viendo los planes de Hireando y me gustaría recibir más información.";
                     msg.dispatchEvent(new Event('input'));
                 }
             }
