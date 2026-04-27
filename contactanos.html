@@ -170,7 +170,6 @@
             formElement: '#contact-form', 
             formId: 'mnjlyvdq',
             onSuccess: function() {
-                // Al enviar con éxito, ocultamos el form para mostrar solo el mensaje
                 document.getElementById('contact-form').style.display = 'none';
                 document.getElementById('status-success').style.display = 'block';
             }
@@ -179,7 +178,7 @@
     <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 
     <script>
-        // Lógica de carga de componentes (nav/footer)
+        // Carga de componentes
         function loadComponent(url, elementId) {
             fetch(url)
                 .then(res => res.ok ? res.text() : Promise.reject())
@@ -189,7 +188,7 @@
         loadComponent('nav.html', 'menu-placeholder');
         loadComponent('footer.html', 'footer-placeholder');
 
-        // Lógica de seguridad y contador (Tu código original mantenido)
+        // LÓGICA DE SEGURIDAD Y FILTROS
         const securityAlert = document.getElementById('security-alert');
         const filtros = {
             'nombre': /[^a-zA-ZÀ-ÿ\s]/g,
@@ -215,6 +214,19 @@
                     document.getElementById('charCount').textContent = `${e.target.value.length} / 1000`;
                 }
             });
+        });
+
+        // PARÁMETROS URL - AUTORELLENO
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('ref') === 'planes') {
+                const msg = document.getElementById('mensajeInput');
+                if (msg) {
+                    msg.value = "Hola, estuve viendo los planes de Hireando y me gustaría recibir más información.";
+                    // Disparar evento input manualmente para que se limpie por seguridad y actualice el contador
+                    msg.dispatchEvent(new Event('input'));
+                }
+            }
         });
     </script>
 </body>
