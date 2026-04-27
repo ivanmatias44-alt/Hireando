@@ -66,7 +66,6 @@
             display: none;
         }
 
-        /* Estilos para mensajes de Formspree */
         #status-success { 
             display: none; 
             color: var(--verde-primario); 
@@ -91,10 +90,10 @@
                 <div class="col-md-6 form-container">
                     <h2 class="text-center mb-4" style="color: var(--violeta-oscuro);">¡Hablemos!</h2>
                     
-                    <div id="status-success" class="alert alert-success mb-3" data-fs-success>
+                    <div id="status-success" class="alert alert-success mb-3">
                         <i class="fa-solid fa-circle-check"></i> ¡Mensaje enviado con éxito! Nos contactaremos pronto.
                     </div>
-                    <div id="status-error" class="alert alert-danger mb-3" data-fs-error>
+                    <div id="status-error" class="alert alert-danger mb-3">
                         Hubo un error al enviar el mensaje. Por favor intenta nuevamente.
                     </div>
 
@@ -106,14 +105,13 @@
                                    id="nombre"
                                    name="nombre" 
                                    class="form-control" 
-                                   data-fs-field
                                    required 
                                    minlength="3" 
                                    maxlength="50"
                                    pattern="^[a-zA-ZÀ-ÿ\s]+$"
                                    title="Solo se permiten letras y espacios">
                             <div class="invalid-feedback">
-                                El nombre es obligatorio (mínimo 3 letras, solo texto).
+                                El nombre es obligatorio (mínimo 3 letras).
                             </div>
                         </div>
 
@@ -123,13 +121,11 @@
                                    id="email"
                                    name="email" 
                                    class="form-control" 
-                                   data-fs-field
                                    required
                                    maxlength="100"
-                                   pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-                                   title="Formato de email válido">
+                                   pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
                             <div class="invalid-feedback">
-                                Ingresa un correo electrónico válido.
+                                Ingresa un correo electrónico válido (ej: nombre@dominio.com).
                             </div>
                         </div>
 
@@ -138,7 +134,6 @@
                             <textarea id="mensajeInput" 
                                       name="mensaje" 
                                       class="form-control" 
-                                      data-fs-field
                                       rows="4" 
                                       required 
                                       minlength="10" 
@@ -153,7 +148,7 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="btn-enviar" data-fs-submit-btn>Enviar Mensaje</button>
+                        <button type="submit" id="btn-submit" class="btn-enviar">Enviar Mensaje</button>
                     </form>
                 </div>
             </div>
@@ -165,35 +160,55 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
-        // Lógica de Validación de Bootstrap
-        (function () {
-            'use strict'
-            var forms = document.querySelectorAll('.needs-validation')
-            Array.prototype.slice.call(forms)
-                .forEach(function (form) {
-                    form.addEventListener('submit', function (event) {
-                        if (!form.checkValidity()) {
-                            event.preventDefault()
-                            event.stopPropagation()
-                        }
-                        form.classList.add('was-validated')
-                    }, false)
-                })
-        })()
+        const contactForm = document.getElementById('contact-form');
+        const statusSuccess = document.getElementById('status-success');
+        const statusError = document.getElementById('status-error');
 
-        window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
-        formspree('initForm', { 
-            formElement: '#contact-form', 
-            formId: 'mnjlyvdq',
-            onSuccess: function() {
-                document.getElementById('contact-form').style.display = 'none';
-                document.getElementById('status-success').style.display = 'block';
+        // Manejador del envío
+        contactForm.addEventListener('submit', async function(event) {
+            event.preventDefault(); // Detenemos el envío por defecto
+            
+            // Validamos con Bootstrap
+            if (!contactForm.checkValidity()) {
+                event.stopPropagation();
+                contactForm.classList.add('was-validated');
+                return; // Si no es válido, no hacemos nada más
+            }
+
+            contactForm.classList.add('was-validated');
+            const formData = new FormData(contactForm);
+            const btnSubmit = document.getElementById('btn-submit');
+            
+            btnSubmit.disabled = true;
+            btnSubmit.textContent = "Enviando...";
+
+            // Envío manual vía Fetch (evita conflictos de librerías externas)
+            try {
+                const response = await fetch(contactForm.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    contactForm.reset();
+                    contactForm.style.display = 'none';
+                    statusSuccess.style.display = 'block';
+                    statusError.style.display = 'none';
+                } else {
+                    const data = await response.json();
+                    throw new Error(data.errors ? data.errors[0].message : "Error desconocido");
+                }
+            } catch (error) {
+                console.error("Error Formspree:", error);
+                statusError.style.display = 'block';
+                statusError.textContent = "Error: " + (error.message.includes("should be an email") ? "El formato del email no es válido." : "Hubo un problema al enviar.");
+            } finally {
+                btnSubmit.disabled = false;
+                btnSubmit.textContent = "Enviar Mensaje";
             }
         });
-    </script>
-    <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
 
-    <script>
         // Carga de componentes
         function loadComponent(url, elementId) {
             fetch(url)
@@ -204,7 +219,7 @@
         loadComponent('nav.html', 'menu-placeholder');
         loadComponent('footer.html', 'footer-placeholder');
 
-        // LÓGICA DE SEGURIDAD Y FILTROS
+        // Lógica de filtros y contador
         const securityAlert = document.getElementById('security-alert');
         const filtros = {
             'nombre': /[^a-zA-ZÀ-ÿ\s]/g,
@@ -230,18 +245,6 @@
                     document.getElementById('charCount').textContent = `${e.target.value.length} / 1000`;
                 }
             });
-        });
-
-        // PARÁMETROS URL - AUTORELLENO
-        window.addEventListener('DOMContentLoaded', () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('ref') === 'planes') {
-                const msg = document.getElementById('mensajeInput');
-                if (msg) {
-                    msg.value = "Hola, estuve viendo los planes de Hireando y me gustaría recibir más información.";
-                    msg.dispatchEvent(new Event('input'));
-                }
-            }
         });
     </script>
 </body>
