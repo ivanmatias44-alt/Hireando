@@ -42,19 +42,21 @@
         }
 
         .card-servicio { 
-            border: none; 
+            border: 2px solid transparent; /* Borde inicial invisible para evitar saltos */
             border-radius: 20px; 
             padding: 40px; 
             text-align: center; 
             background: var(--gris-fondo); 
-            transition: 0.3s; 
+            transition: all 0.3s ease; 
             height: 100%; 
         }
 
+        /* MODIFICACIÓN: Borde más marcado y sombra al pasar el mouse */
         .card-servicio:hover { 
             transform: translateY(-10px); 
             background: white; 
             box-shadow: 0 15px 30px rgba(107, 66, 193, 0.1); 
+            border: 2px solid var(--violeta-oscuro); /* Color de borde marcado */
         }
 
         .icon-container { 
