@@ -62,6 +62,12 @@
             margin-bottom: 0;
         }
 
+        /* Personalización del gris al pasar el mouse */
+        .table-hover tbody tr:hover {
+            background-color: #f2f2f2 !important;
+            transition: background-color 0.2s ease;
+        }
+
         .table thead th {
             border: none;
             padding: 25px 15px;
@@ -75,6 +81,7 @@
             border-bottom: 1px solid #eee;
             text-align: center;
             color: var(--gris-texto);
+            background-color: transparent; /* Permite que el hover se vea */
         }
 
         .table tbody tr td:first-child {
@@ -141,7 +148,7 @@
                 <h2 class="section-title" data-aos="fade-up">Cuadro comparativo de servicios</h2>
                 
                 <div class="table-container" data-aos="fade-up" data-aos-delay="200">
-                    <table class="table">
+                    <table class="table table-hover">
                         <thead>
                             <tr>
                                 <th style="width: 25%;">Servicio</th>
@@ -225,9 +232,6 @@
     <script>
         AOS.init({ duration: 1000, once: true });
         
-        /**
-         * Función para cargar componentes HTML externos
-         */
         async function loadComponent(url, elementId) {
             try {
                 const response = await fetch(url);
@@ -239,7 +243,6 @@
             }
         }
 
-        // Cargar Nav y Footer al iniciar
         document.addEventListener('DOMContentLoaded', () => {
             loadComponent('nav.html', 'menu-placeholder');
             loadComponent('footer.html', 'footer-placeholder');
