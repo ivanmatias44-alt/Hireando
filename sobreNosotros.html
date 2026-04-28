@@ -75,11 +75,12 @@
         }
 
         .proposal-card {
-            background: white;
+            /* MODIFICACIÓN: Fondo violeta muy suave por defecto */
+            background: rgba(167, 123, 230, 0.07); 
             border-radius: 25px;
             padding: 40px 30px;
             height: 100%;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.04);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.02);
             transition: all 0.3s ease;
             /* Borde inicial sutil */
             border: 2px solid transparent; 
@@ -89,17 +90,18 @@
             text-align: center;
         }
 
-        /* MODIFICACIÓN: Borde más marcado al pasar el mouse */
+        /* MODIFICACIÓN: Borde y elevación al pasar el mouse */
         .proposal-card:hover { 
             transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(107, 66, 193, 0.1);
-            border: 2px solid var(--violeta-suave); /* Color de borde más visible */
+            border: 2px solid var(--violeta-suave);
+            background: rgba(167, 123, 230, 0.12); /* Un toque más de color en hover */
         }
 
         .icon-wrapper {
             width: 100px;
             height: 100px;
-            background-color: rgba(102, 194, 102, 0.12);
+            background-color: white; /* Cambiado a blanco para que resalte sobre el fondo suave */
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -107,6 +109,7 @@
             margin-bottom: 25px;
             padding: 12px;
             overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
 
         .proposal-icon {
@@ -294,9 +297,6 @@
     <script>
         AOS.init({ duration: 1000, once: true });
 
-        /**
-         * Carga de componentes externos
-         */
         async function loadComponent(url, elementId) {
             try {
                 const response = await fetch(url);
@@ -308,7 +308,6 @@
             }
         }
 
-        // Ejecutar al cargar el DOM
         document.addEventListener('DOMContentLoaded', () => {
             loadComponent('nav.html', 'menu-placeholder');
             loadComponent('footer.html', 'footer-placeholder');
