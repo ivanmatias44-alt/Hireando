@@ -234,6 +234,18 @@
                 }
             });
         });
+
+        // MODIFICACIÓN: Lógica para detectar si viene de planes y setear el mensaje
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('ref') === 'plan') {
+                const mensajeArea = document.getElementById('mensajeInput');
+                const textoPlanes = "Hola, estuve viendo los planes de Hireando y me gustaría recibir más información.¿Podrían ayudarme a encontrar el plan ideal para mi búsqueda?";
+                mensajeArea.value = textoPlanes;
+                // Actualizar contador de caracteres
+                document.getElementById('charCount').textContent = `${textoPlanes.length} / 1000`;
+            }
+        });
     </script>
 </body>
 </html>
